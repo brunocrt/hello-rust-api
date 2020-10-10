@@ -19,9 +19,10 @@ fn handle_connection(mut stream: TcpStream) {
     
     println!("Request: {}", String::from_utf8_lossy(&buffer[..]));
 
+    let get_root = b"GET / HTTP/1.1\r\n";
     let get_test = b"GET /test HTTP/1.1\r\n";
 
-    if buffer.starts_with(get_test) {
+    if buffer.starts_with(get_root) {
         test_reponse(stream)
     } else {
         hello_reponse(stream)
